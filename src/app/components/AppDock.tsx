@@ -1,14 +1,9 @@
 "use client";
-import {
-  CheckCheck,
-  Moon,
-  NotepadText,
-  Plus,
-  Sun,
-} from "lucide-react";
+import { CheckCheck, Moon, NotepadText, Plus, Sun } from "lucide-react";
 
 import { Dock, DockIcon, DockItem, DockLabel } from "@/components/ui/dock";
 import { useTheme } from "next-themes";
+import Link from "next/link";
 
 export function AppDock() {
   const { setTheme, theme } = useTheme();
@@ -18,12 +13,14 @@ export function AppDock() {
       icon: (
         <Plus className="h-full w-full text-neutral-600 dark:text-neutral-300" />
       ),
+      href: "/add-todo",
     },
     {
       title: "Todos",
       icon: (
         <NotepadText className="h-full w-full text-neutral-600 dark:text-neutral-300" />
       ),
+      href: "/",
     },
     {
       title: "Completed",
@@ -59,7 +56,17 @@ export function AppDock() {
                   {item.icon}
                 </button>
               )}
-              {item.title !== "Light" && item.title !== "Dark" && item.icon}
+              {item.title !== "Light" &&
+                item.title !== "Dark" &&
+                item.href !== undefined && (
+                  <Link className="h-full w-full" href={item.href}>
+                    {item.icon}
+                  </Link>
+                )}
+              {item.title !== "Light" &&
+                item.title !== "Dark" &&
+                item.href === undefined &&
+                item.icon}
             </DockIcon>
           </DockItem>
         ))}
