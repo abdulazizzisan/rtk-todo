@@ -36,7 +36,7 @@ export default function RootLayout({
           disableTransitionOnChange
           storageKey={"theme"}
         >
-          <main>{children}</main>
+          <main className='container mx-auto p-4'>{children}</main>
           <AppDock />
         </ThemeProvider>
       </body>
