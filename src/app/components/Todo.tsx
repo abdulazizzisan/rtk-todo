@@ -8,18 +8,20 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import type { Todo } from "@/lib/redux/features/todos/todosSlice";
+import { deleteTodo, type Todo } from "@/lib/redux/features/todos/todosSlice";
+import { useAppDispatch } from "@/lib/hooks";
 
 const Todo = ({ todo }: { todo: Todo }) => {
+  const dispatch = useAppDispatch();
   return (
-    <div className="mb-2 flex w-full flex-col sm:flex-row items-start sm:items-center justify-between rounded-lg bg-card p-3 sm:p-4 text-card-foreground shadow">
-      <div className="mb-2 sm:mb-0 sm:mr-4 flex-1">
-        <h2 className="text-lg sm:text-base md:text-lg font-semibold break-words">
+    <div className="bg-card text-card-foreground mb-2 flex w-full flex-col items-start justify-between rounded-lg p-3 shadow sm:flex-row sm:items-center sm:p-4">
+      <div className="mb-2 flex-1 sm:mr-4 sm:mb-0">
+        <h2 className="text-lg font-semibold break-words sm:text-base md:text-lg">
           {todo.text}
         </h2>
       </div>
-      <div className="w-full sm:w-auto flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:space-x-2">
-        <span className="text-muted-foreground text-xs sm:text-sm mb-2 sm:mb-0 sm:mr-4">
+      <div className="flex w-full flex-col items-start gap-2 sm:w-auto sm:flex-row sm:items-center sm:space-x-2">
+        <span className="text-muted-foreground mb-2 text-xs sm:mr-4 sm:mb-0 sm:text-sm">
           Due:{" "}
           <span
             className={cn({
@@ -29,10 +31,16 @@ const Todo = ({ todo }: { todo: Todo }) => {
             {format(todo.due, "PP")}
           </span>
         </span>
-        <div className="flex space-x-2 w-full sm:w-auto">
+        <div className="flex w-full space-x-2 sm:w-auto">
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button size="sm" variant="destructive">
+              <Button
+                size="sm"
+                variant="destructive"
+                onClick={() => {
+                  dispatch(deleteTodo({ id: todo.id }));
+                }}
+              >
                 <Trash className="h-4 w-4" />
               </Button>
             </TooltipTrigger>
