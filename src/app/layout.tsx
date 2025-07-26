@@ -26,6 +26,28 @@ export const metadata: Metadata = {
       url: "https://abdulazizzisan.com",
     },
   ],
+  icons: {
+    icon: [
+      {
+        url: "/fav-light.svg",
+        media: "(prefers-color-scheme: light)",
+      },
+      {
+        url: "/fav-dark.svg",
+        media: "(prefers-color-scheme: dark)",
+      },
+    ],
+    apple: [
+      {
+        url: "/fav-light.svg",
+        media: "(prefers-color-scheme: light)",
+      },
+      {
+        url: "/fav-dark.svg",
+        media: "(prefers-color-scheme: dark)",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
