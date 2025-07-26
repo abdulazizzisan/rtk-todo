@@ -3,15 +3,15 @@ import {v4 as uuid} from "uuid"
 
 type Todo = {
   id: string;
-  due: Date;
+  due: string;
   text: string;
   completed: boolean;
 };
 const todosSlice = createSlice({
   name: "todos",
   initialState: [
-    { id: uuid(), due: new Date("2025-06-30"), text: "Sample Todo with past date", completed: false },
-    { id: uuid(), due: new Date("2026-06-30"), text: "Sample Todo with future date", completed: false },
+    { id: uuid(), due: new Date("2025-06-30").toISOString(), text: "Sample Todo with past date", completed: false },
+    { id: uuid(), due: new Date("2026-06-30").toISOString(), text: "Sample Todo with future date", completed: false },
   ] as Todo[],
   reducers: {
     addTodo: (state, action: { payload: Todo }) => {
