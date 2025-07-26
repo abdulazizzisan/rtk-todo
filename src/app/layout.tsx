@@ -45,7 +45,7 @@ export default function RootLayout({
           storageKey={"theme"}
         >
           <StoreProvider>
-            <main className="xl:container mx-auto p-4">{children}</main>
+            <main className="xl:container mx-auto p-4 pb-24">{children}</main>
             <AppDock />
           </StoreProvider>
         </ThemeProvider>
