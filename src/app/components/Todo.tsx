@@ -11,14 +11,15 @@ import {
 import type { Todo } from "@/lib/redux/features/todos/todosSlice";
 
 const Todo = ({ todo }: { todo: Todo }) => {
-
   return (
-    <div className="bg-card text-card-foreground mb-2 flex w-1/2 items-center justify-between rounded-lg p-4 shadow">
-      <div className="mr-7 flex-1">
-        <h2 className="text-lg font-semibold">{todo.text}</h2>
+    <div className="mb-2 flex w-full flex-col sm:flex-row items-start sm:items-center justify-between rounded-lg bg-card p-3 sm:p-4 text-card-foreground shadow">
+      <div className="mb-2 sm:mb-0 sm:mr-4 flex-1">
+        <h2 className="text-lg sm:text-base md:text-lg font-semibold break-words">
+          {todo.text}
+        </h2>
       </div>
-      <div className="space-x-2">
-        <span className="text-muted-foreground mr-4 text-sm">
+      <div className="w-full sm:w-auto flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:space-x-2">
+        <span className="text-muted-foreground text-xs sm:text-sm mb-2 sm:mb-0 sm:mr-4">
           Due:{" "}
           <span
             className={cn({
@@ -28,22 +29,24 @@ const Todo = ({ todo }: { todo: Todo }) => {
             {format(todo.due, "PP")}
           </span>
         </span>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Button variant="destructive">
-              <Trash />
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent>Delete</TooltipContent>
-        </Tooltip>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Button variant="outline">
-              <Check />
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent>Complete</TooltipContent>
-        </Tooltip>
+        <div className="flex space-x-2 w-full sm:w-auto">
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button size="sm" variant="destructive">
+                <Trash className="h-4 w-4" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>Delete</TooltipContent>
+          </Tooltip>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button size="sm" variant="outline">
+                <Check className="h-4 w-4" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>Complete</TooltipContent>
+          </Tooltip>
+        </div>
       </div>
     </div>
   );
