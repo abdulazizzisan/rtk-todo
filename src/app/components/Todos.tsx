@@ -9,7 +9,7 @@ const Todos = () => {
         <div className='bg-background text-foreground p-4 flex flex-col items-center justify-center'>
             <h1 className='text-2xl font-bold mb-5'>Your Todos</h1>
             {todos.map((todo) => (
-                <Todo key={todo.id}>{todo.text}</Todo>
+                <Todo key={todo.id} todo={todo} />
             ))}
         </div>
     );

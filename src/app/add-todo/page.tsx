@@ -5,6 +5,7 @@ import { useAppDispatch } from "@/lib/hooks";
 import { addTodo } from "@/lib/redux/features/todos/todosSlice";
 import { useRouter } from "next/navigation";
 import React from "react";
+import { v4 as uuid } from "uuid";
 
 const AddTodo = () => {
   const router = useRouter();
@@ -15,7 +16,7 @@ const AddTodo = () => {
         className="flex flex-col items-center space-y-4"
         onSubmit={(e) => {
           e.preventDefault();
-          dispatch(addTodo({ id: Date.now(), text: e.currentTarget.todo.value, completed: false }));
+          dispatch(addTodo({ id: uuid(), text: e.currentTarget.todo.value, completed: false, due: new Date()}));
           e.currentTarget.todo.value = "";
           router.push("/");
         }}

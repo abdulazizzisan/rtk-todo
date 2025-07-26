@@ -1,18 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
+import {v4 as uuid} from "uuid"
 
 type Todo = {
-  id: number;
+  id: string;
+  due: Date;
   text: string;
   completed: boolean;
 };
 const todosSlice = createSlice({
   name: "todos",
   initialState: [
-    { id: 1, text: "Sample Todo from rtk", completed: false },
-    { id: 2, text: "Another Todo", completed: false },
+    { id: uuid(), due: new Date("2025-06-30"), text: "Sample Todo with past date", completed: false },
+    { id: uuid(), due: new Date("2026-06-30"), text: "Sample Todo with future date", completed: false },
   ] as Todo[],
   reducers: {
-    addTodo: (state, action) => {
+    addTodo: (state, action: { payload: Todo }) => {
       state.push(action.payload);
     },
     deleteTodo: (state, action) => {
@@ -30,3 +32,5 @@ const todosSlice = createSlice({
 export const { addTodo, deleteTodo, markCompleted } = todosSlice.actions;
 
 export default todosSlice.reducer;
+
+export type { Todo };
