@@ -7,7 +7,10 @@ type Todo = {
 };
 const todosSlice = createSlice({
   name: "todos",
-  initialState: [] as Todo[],
+  initialState: [
+    { id: 1, text: "Sample Todo from rtk", completed: false },
+    { id: 2, text: "Another Todo", completed: false },
+  ] as Todo[],
   reducers: {
     addTodo: (state, action) => {
       state.push(action.payload);
@@ -20,7 +23,7 @@ const todosSlice = createSlice({
       if (todo) {
         todo.completed = !todo.completed;
       }
-    }
+    },
   },
 });
 

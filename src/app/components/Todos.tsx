@@ -1,14 +1,16 @@
+"use client";
 import React from 'react';
 import Todo from './Todo';
+import { useAppSelector } from '@/lib/hooks';
 
 const Todos = () => {
+    const todos = useAppSelector((state) => state.todos);
     return (
         <div className='bg-background text-foreground p-4 flex flex-col items-center justify-center'>
             <h1 className='text-2xl font-bold mb-5'>Your Todos</h1>
-            <Todo>Call Girlfriend & Work out everyday Call Girlfriend & Work out everyday Call Girlfriend & Work out everyday</Todo>
-            <Todo>Buy Groceries</Todo>
-            <Todo>Finish Project</Todo>
-
+            {todos.map((todo) => (
+                <Todo key={todo.id}>{todo.text}</Todo>
+            ))}
         </div>
     );
 };
