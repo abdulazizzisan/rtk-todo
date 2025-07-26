@@ -4,7 +4,7 @@ import todoReducer from "./features/todos/todosSlice";
 export const makeStore = () => {
   return configureStore({
     reducer: {
-    todos: todoReducer,
+      todos: todoReducer,
     },
   });
 };
@@ -12,6 +12,6 @@ export const makeStore = () => {
 // infer the type of makeStore
 export type AppStore = ReturnType<typeof makeStore>;
 
-// Infer the `RootState` & `AppDispatch` types from the store itself 
-export type RootState = ReturnType<AppStore['getState']>
-export type AppDispatch = AppStore['dispatch']
+// Infer the `RootState` & `AppDispatch` types from the store itself
+export type RootState = ReturnType<AppStore["getState"]>;
+export type AppDispatch = AppStore["dispatch"];

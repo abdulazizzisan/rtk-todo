@@ -3,7 +3,7 @@ import React from "react";
 import Todo from "./Todo";
 import { useAppSelector } from "@/lib/hooks";
 
-const Todos = ({completed}: {completed: boolean}) => {
+const Todos = ({ completed }: { completed: boolean }) => {
   const todos = useAppSelector((state) => state.todos);
   return (
     <div className="bg-background text-foreground flex flex-col items-center justify-center p-4">

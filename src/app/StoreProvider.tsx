@@ -12,7 +12,7 @@ const StoreProvider = ({ children }: { children: React.ReactNode }) => {
 
     // if you want to load initial data, you can dispatch the loading function here.
     // storeRef.current.dispatch(initialDataLoadingReducer(action))
-    storeRef.current.dispatch(loadTodos())
+    storeRef.current.dispatch(loadTodos());
   }
   return <Provider store={storeRef.current}>{children}</Provider>;
 };
