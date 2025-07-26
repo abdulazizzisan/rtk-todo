@@ -13,7 +13,7 @@ import { useAppDispatch } from "@/lib/hooks";
 import { addTodo } from "@/lib/redux/features/todos/todosSlice";
 import { CalendarIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { v4 as uuid } from "uuid";
 
 const AddTodo = () => {
@@ -22,6 +22,13 @@ const AddTodo = () => {
   const [todoText, setTodoText] = useState("");
   const [date, setDate] = React.useState<Date | undefined>(new Date());
   const [popover, setPopover] = useState<boolean>(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    // Focus the input element when component mounts
+    inputRef.current?.focus();
+  }, []);
+
   const handleCalendarSelect = (date: Date | undefined) => {
     setDate(date);
     setPopover(false);
@@ -54,6 +61,7 @@ const AddTodo = () => {
           Add a New Todo
         </h1>
         <Input
+          ref={inputRef}
           type="text"
           placeholder="Enter your todo"
           value={todoText}
