@@ -8,6 +8,9 @@ const StoreProvider = ({ children }: { children: React.ReactNode }) => {
   if (!storeRef.current) {
     //create the store if doesn't exist
     storeRef.current = makeStore();
+
+    // if you want to load initial data, you can dispatch the loading function here.
+    // storeRef.current.dispatch(initialDataLoadingReducer(action))
   }
   return <Provider store={storeRef.current}>{children}</Provider>;
 };
