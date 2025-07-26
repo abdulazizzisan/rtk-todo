@@ -4,6 +4,7 @@ import { CheckCheck, Moon, NotepadText, Plus, Sun } from "lucide-react";
 import { Dock, DockIcon, DockItem, DockLabel } from "@/components/ui/dock";
 import { useTheme } from "next-themes";
 import Link from "next/link";
+import { hr } from "date-fns/locale";
 
 export function AppDock() {
   const { setTheme, theme } = useTheme();
@@ -27,6 +28,7 @@ export function AppDock() {
       icon: (
         <CheckCheck className="h-full w-full text-neutral-600 dark:text-neutral-300" />
       ),
+      href: "/completed-todos",
     },
     {
       title: theme === "dark" ? "Light" : "Dark",
