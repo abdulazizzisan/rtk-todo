@@ -8,7 +8,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { deleteTodo, type Todo } from "@/lib/redux/features/todos/todosSlice";
+import { deleteTodo, markCompleted, type Todo } from "@/lib/redux/features/todos/todosSlice";
 import { useAppDispatch } from "@/lib/hooks";
 
 const Todo = ({ todo }: { todo: Todo }) => {
@@ -48,7 +48,9 @@ const Todo = ({ todo }: { todo: Todo }) => {
           </Tooltip>
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button size="sm" variant="outline">
+              <Button size="sm" variant="outline" onClick={() => {
+                dispatch(markCompleted(todo.id));
+              }}>
                 <Check className="h-4 w-4" />
               </Button>
             </TooltipTrigger>

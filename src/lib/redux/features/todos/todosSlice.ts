@@ -23,9 +23,10 @@ const todosSlice = createSlice({
       return filteredState;
     },
     markCompleted: (state, action) => {
-      const todo = state.find((todo) => todo.id === action.payload.id);
+      const todo = state.find((todo) => todo.id === action.payload);
       if (todo) {
         todo.completed = !todo.completed;
+        localStorage.setItem("todos", JSON.stringify(state));
       }
     },
     loadTodos: (state) => {

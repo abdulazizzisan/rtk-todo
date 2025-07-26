@@ -8,9 +8,11 @@ const Todos = () => {
   return (
     <div className="bg-background text-foreground flex flex-col items-center justify-center p-4">
       <h1 className="mb-5 text-2xl font-bold">Your Todos</h1>
-      {todos.map((todo) => (
-        <Todo key={todo.id} todo={todo} />
-      ))}
+      {todos
+        .filter((todo) => !todo.completed)
+        .map((todo) => (
+          <Todo key={todo.id} todo={todo} />
+        ))}
     </div>
   );
 };
