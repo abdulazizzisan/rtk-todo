@@ -47,7 +47,7 @@ export default function RootLayout({
         >
           <StoreProvider>
             <main className="mx-auto p-4 pb-24 xl:container">{children}</main>
-            <Toaster/>
+            <Toaster />
             <AppDock />
           </StoreProvider>
         </ThemeProvider>

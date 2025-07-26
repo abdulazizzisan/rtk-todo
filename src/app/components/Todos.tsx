@@ -19,11 +19,11 @@ const Todos = ({ completed }: { completed: boolean }) => {
         {completed ? "Completed" : "Your"} Todos
       </h1>
       {filteredTodos.length > 0 ? (
-        filteredTodos.map((todo) => (
-          <Todo key={todo.id} todo={todo} />
-        ))
+        filteredTodos.map((todo) => <Todo key={todo.id} todo={todo} />)
       ) : (
-        <p className="text-muted-foreground text-lg font-light">No todos {completed ? "completed" : "found"}</p>
+        <p className="text-muted-foreground text-lg font-light">
+          No todos {completed ? "completed" : "found"}
+        </p>
       )}
     </div>
   );
