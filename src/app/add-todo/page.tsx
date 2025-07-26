@@ -93,7 +93,7 @@ const AddTodo = () => {
         <Button
           className="w-full px-8 sm:w-auto"
           type="submit"
-          disabled={!todoText.trim()}
+          disabled={!todoText.trim() || !date}
         >
           Add Todo
         </Button>
