@@ -15,12 +15,13 @@ import { CalendarIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { useState, useRef, useEffect } from "react";
 import { v4 as uuid } from "uuid";
+import { toast } from "sonner";
 
 const AddTodo = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const [todoText, setTodoText] = useState("");
-  const [date, setDate] = React.useState<Date | undefined>(new Date());
+  const [date, setDate] = React.useState<Date | undefined>(undefined);
   const [popover, setPopover] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -30,6 +31,10 @@ const AddTodo = () => {
   }, []);
 
   const handleCalendarSelect = (date: Date | undefined) => {
+    if (date && date < new Date()) {
+      toast.error("Due date cannot be in the past");
+      return;
+    }
     setDate(date);
     setPopover(false);
   };
@@ -72,7 +77,6 @@ const AddTodo = () => {
           <Popover open={popover} onOpenChange={setPopover}>
             <PopoverTrigger asChild>
               <Button className="w-full">
-                <span className="text-muted-foreground">Due: </span>
                 {date ? format(date, "PPP") : <span>Select Due Date</span>}
                 <CalendarIcon />
               </Button>
