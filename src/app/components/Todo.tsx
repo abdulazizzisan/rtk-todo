@@ -20,7 +20,12 @@ const Todo = ({ todo }: { todo: Todo }) => {
   return (
     <div className="bg-card text-card-foreground mb-2 flex w-full flex-col items-start justify-between rounded-lg p-3 shadow sm:flex-row sm:items-center sm:p-4">
       <div className="mb-2 flex-1 sm:mr-4 sm:mb-0">
-        <h2 className="text-lg font-semibold break-words sm:text-base md:text-lg">
+        <h2
+          className={cn({
+            "text-lg font-semibold break-words sm:text-base md:text-lg": true,
+            "line-through": todo.completed,
+          })}
+        >
           {todo.text}
         </h2>
       </div>
