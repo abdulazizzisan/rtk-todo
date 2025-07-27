@@ -44,6 +44,7 @@ const Todo = ({ todo }: { todo: Todo }) => {
           <Tooltip>
             <TooltipTrigger asChild>
               <Button
+                className="hover:cursor-pointer"
                 size="sm"
                 variant="destructive"
                 onClick={() => {
@@ -59,6 +60,7 @@ const Todo = ({ todo }: { todo: Todo }) => {
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button
+                  className="hover:cursor-pointer"
                   size="sm"
                   variant="outline"
                   onClick={() => {

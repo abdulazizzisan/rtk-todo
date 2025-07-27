@@ -84,7 +84,7 @@ export function AppDock() {
             <DockLabel>{item.title}</DockLabel>
             <DockIcon>
               {item.onClick && (
-                <button className="h-full w-full" onClick={item.onClick}>
+                <button className="h-full w-full hover:cursor-pointer" onClick={item.onClick}>
                   {item.icon}
                 </button>
               )}

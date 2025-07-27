@@ -77,7 +77,7 @@ const AddTodo = () => {
         <div className="w-full">
           <Popover open={popover} onOpenChange={setPopover}>
             <PopoverTrigger asChild>
-              <Button className="w-full">
+              <Button className="w-full hover:cursor-pointer">
                 {date ? format(date, "PPP") : <span>Select Due Date</span>}
                 <CalendarIcon />
               </Button>
@@ -95,7 +95,7 @@ const AddTodo = () => {
           </Popover>
         </div>
         <Button
-          className="w-full px-8 sm:w-auto"
+          className="w-full px-8 sm:w-auto hover:cursor-pointer"
           type="submit"
           disabled={!todoText.trim() || !date}
         >
