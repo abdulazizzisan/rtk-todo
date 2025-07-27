@@ -1,10 +1,9 @@
 "use client";
-import { CheckCheck, Moon, NotepadText, Plus, Sun } from "lucide-react";
+import { CheckCheck, CornerLeftDown, Moon, NotepadText, Plus, Sun } from "lucide-react";
 
 import { Dock, DockIcon, DockItem, DockLabel } from "@/components/ui/dock";
 import { useTheme } from "next-themes";
 import Link from "next/link";
-import { hr } from "date-fns/locale";
 
 export function AppDock() {
   const { setTheme, theme } = useTheme();
@@ -31,6 +30,13 @@ export function AppDock() {
       href: "/completed-todos",
     },
     {
+      title: "Load Todos from Typicode using RTK Query",
+      icon: (
+        <CornerLeftDown className="h-full w-full text-neutral-600 dark:text-neutral-300" />
+      ),
+      onClick: () => {},
+    },
+    {
       title: theme === "dark" ? "Light" : "Dark",
       icon: (
         <>
@@ -38,6 +44,7 @@ export function AppDock() {
           <Sun className="hidden h-full w-full text-neutral-600 dark:block dark:text-neutral-300" />
         </>
       ),
+      onClick: () => setTheme(theme === "dark" ? "light" : "dark"),
     },
   ];
   return (
@@ -50,25 +57,19 @@ export function AppDock() {
           >
             <DockLabel>{item.title}</DockLabel>
             <DockIcon>
-              {(item.title === "Light" || item.title === "Dark") && (
+              {(item.onClick) && (
                 <button
                   className="h-full w-full"
-                  onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                  onClick={item.onClick}
                 >
                   {item.icon}
                 </button>
               )}
-              {item.title !== "Light" &&
-                item.title !== "Dark" &&
-                item.href !== undefined && (
+              {item.href && (
                   <Link className="h-full w-full" href={item.href}>
                     {item.icon}
                   </Link>
                 )}
-              {item.title !== "Light" &&
-                item.title !== "Dark" &&
-                item.href === undefined &&
-                item.icon}
             </DockIcon>
           </DockItem>
         ))}
