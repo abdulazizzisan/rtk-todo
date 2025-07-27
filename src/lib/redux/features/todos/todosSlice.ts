@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { v4 as uuid } from "uuid";
+import { toast } from "sonner";
 
 type Todo = {
   id: string;
@@ -11,7 +11,11 @@ const todosSlice = createSlice({
   name: "todos",
   initialState: [] as Todo[],
   reducers: {
-    addTodo: (state, action: { payload: Todo }) => {
+    addTodo: (state: Todo[], action: { payload: Todo }) => {
+      if (state.find((todo) => todo.text === action.payload.text)) {
+        toast.error("todo already exists")
+        return state; // Prevent adding a duplicate todo
+      }
       state.push(action.payload);
       localStorage.setItem("todos", JSON.stringify(state));
     },

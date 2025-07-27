@@ -1,11 +1,23 @@
 "use client";
-import { CheckCheck, CornerLeftDown, Moon, NotepadText, Plus, Sun } from "lucide-react";
+import {
+  CheckCheck,
+  CornerLeftDown,
+  Moon,
+  NotepadText,
+  Plus,
+  Sun,
+} from "lucide-react";
 
 import { Dock, DockIcon, DockItem, DockLabel } from "@/components/ui/dock";
 import { useTheme } from "next-themes";
 import Link from "next/link";
+import { useAppDispatch } from "@/lib/hooks";
+import { useGetTodosQuery } from "@/lib/redux/features/todos/todoApiSlice";
+import { addTodo } from "@/lib/redux/features/todos/todosSlice";
 
 export function AppDock() {
+  const dispatch = useAppDispatch();
+  const { data: todos, isLoading } = useGetTodosQuery(10);
   const { setTheme, theme } = useTheme();
   const data = [
     {
@@ -30,11 +42,25 @@ export function AppDock() {
       href: "/completed-todos",
     },
     {
-      title: "Load Todos from Typicode using RTK Query",
+      title: "fetch jsonplaceholder todos with RTK Query",
       icon: (
         <CornerLeftDown className="h-full w-full text-neutral-600 dark:text-neutral-300" />
       ),
-      onClick: () => {},
+      onClick: (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.currentTarget.disabled = true;
+        if (!isLoading) {
+          todos?.forEach((todo) => {
+            dispatch(
+              addTodo({
+              id: todo.id.toString(),
+              due: new Date(Date.now() + Math.floor(Math.random() * 10 + 1) * 24 * 60 * 60 * 1000).toISOString(),
+              text: todo.title,
+              completed: todo.completed,
+              }),
+            );
+          });
+        }
+      },
     },
     {
       title: theme === "dark" ? "Light" : "Dark",
@@ -57,19 +83,16 @@ export function AppDock() {
           >
             <DockLabel>{item.title}</DockLabel>
             <DockIcon>
-              {(item.onClick) && (
-                <button
-                  className="h-full w-full"
-                  onClick={item.onClick}
-                >
+              {item.onClick && (
+                <button className="h-full w-full" onClick={item.onClick}>
                   {item.icon}
                 </button>
               )}
               {item.href && (
-                  <Link className="h-full w-full" href={item.href}>
-                    {item.icon}
-                  </Link>
-                )}
+                <Link className="h-full w-full" href={item.href}>
+                  {item.icon}
+                </Link>
+              )}
             </DockIcon>
           </DockItem>
         ))}
