@@ -18,6 +18,7 @@ import { v4 as uuid } from "uuid";
 import { toast } from "sonner";
 
 const AddTodo = () => {
+
   const router = useRouter();
   const dispatch = useAppDispatch();
   const [todoText, setTodoText] = useState("");
@@ -32,7 +33,7 @@ const AddTodo = () => {
 
   const handleCalendarSelect = (date: Date | undefined) => {
     if (date && date < new Date()) {
-      toast.error("Due date cannot be in the past");
+      toast.error("Due date should be in the future");
       return;
     }
     setDate(date);
@@ -86,6 +87,9 @@ const AddTodo = () => {
                 mode="single"
                 selected={date}
                 onSelect={handleCalendarSelect}
+                disabled={(date) =>
+                  date < new Date(new Date().setHours(0, 0, 0, 0))
+                }
               />
             </PopoverContent>
           </Popover>
